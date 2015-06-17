@@ -55,7 +55,6 @@ class Grafico {
      * <b>GeraGrafico</b> Executa a geração do gráfico.
      */
     public function GeraGrafico(){
-        echo '<div class="grafico" id="'.$this->Div.'" style="width: '.$this->Largura.'px; height: '.$this->Altura.'px;"></div>';
          echo '<script type="text/javascript" src="'.HOME.'library/Helpers/includes/gera-grafico.js"></script>';
          echo '<script type="text/javascript">';
          
@@ -205,6 +204,8 @@ class Grafico {
 
              }
             echo "</script>";
+            
+            return '<div class="grafico" id="'.$this->Div.'" style="width: '.$this->Largura.'px; height: '.$this->Altura.'px;"></div>';
     }
 
     

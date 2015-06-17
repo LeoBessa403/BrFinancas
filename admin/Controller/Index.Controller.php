@@ -4,7 +4,7 @@ class Index{
     
 
     function Index(){
-        $grafico = new Grafico("coluna", "Gastos e Recebimentos", "gastos_recebimentos",320,320);
+        $grafico = new Grafico("coluna", "Gastos e Recebimentos", "gastos_recebimentos",700,700);
               
         $mes = date("m");
         $ano  = date("Y"); 
@@ -31,6 +31,7 @@ class Index{
             $data_inicial = Valida::DataShow("01-".$mes_inicial."-".$ano,"Y/m/d");
             $data_fim     = Valida::CalculaData(Valida::CalculaData($data_ini, 1, "+", "m"), 1, "-");
             $data_final   = Valida::DataShow(str_replace("/", "-", $data_fim), "Y/m/d");
+            
             $RG[$i] = NegociacaoModel::PesquisaNegociacoesGastosRecebimentos($data_inicial,$data_final);           
                 if(count($RG[$i]) == 0):
                     $rec_gas[$i]['recebimentos'] = 0;
@@ -72,8 +73,7 @@ class Index{
                 }
                 $rec_gas[$i]['mes'] = $letra."/".$ano;
         }
-         //debug($RG);
-        
+             
         $dados = array("['Mes','Recebimentos','Gastos']",
            "['".$rec_gas[0]["mes"]."',".$rec_gas[0]["recebimentos"].",".$rec_gas[0]["gastos"]."]",
 	   "['".$rec_gas[1]["mes"]."',".$rec_gas[1]["recebimentos"].",".$rec_gas[1]["gastos"]."]",

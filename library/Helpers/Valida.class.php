@@ -222,9 +222,9 @@ class Valida {
     public static  function CalculaData($data,$diferenca,$operacao){
          self::$Data = explode('/',$data);
          if($operacao == "+"):
-             return date("d/m/Y",mktime(0, 0, 0, self::$Data[1], self::$Data[0] + $diferenca, self::$Data[2]));
+             return date("d/m/Y",mktime(0, 0, 0, self::$Data[0], self::$Data[1] + $diferenca, self::$Data[2]));
          else:
-             return date("d/m/Y",mktime(0, 0, 0, self::$Data[1], self::$Data[0] - $diferenca, self::$Data[2]));
+             return date("d/m/Y",mktime(0, 0, 0, self::$Data[0], self::$Data[1] - $diferenca, self::$Data[2]));
          endif;
     }
     /**

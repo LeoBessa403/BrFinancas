@@ -105,7 +105,7 @@ class NegociacaoModel{
         $campos = "neg.tipo_negociacao, pag.tipo_pagamento, parc.valor_parcela, parc.vencimento, pes.nome_razao, pag.id_negociacao";
         
         $pesquisa = new Pesquisa();
-        $pesquisa->Pesquisar($tabela,"where parc.vencimento BETWEEN '".Valida::DataShow(Valida::DataDB(Valida::CalculaData(Valida::DataAtual("d/m/Y"), 1, "+"),"Y/m/d"),"Y/m/d")."' AND '".Valida::DataShow(Valida::DataDB(Valida::CalculaData(Valida::DataAtual("d/m/Y"), 16, "+"),"Y/m/d"),"Y/m/d")."' AND parc.vencimento_pago is NULL order by parc.vencimento ASC",null,$campos);
+        $pesquisa->Pesquisar($tabela,"where parc.vencimento BETWEEN '".date("Y-m-d", strtotime("+1 days"))."' AND '".date("Y-m-d", strtotime("+16 days"))."' AND parc.vencimento_pago is NULL order by parc.vencimento ASC",null,$campos);
         return $pesquisa->getResult();
         
     }
