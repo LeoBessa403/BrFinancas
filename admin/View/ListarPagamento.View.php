@@ -71,7 +71,7 @@
                                                                                  <?php
                                                                                     foreach ($result as $res):                                                                                        
                                                                                  ?>
-                                                                                    <tr id="registro-<?php echo $res['id_entidade']; ?>" style="background-color: #cfcfcf;">
+                                                                                    <tr id="registro-<?php echo $res['id_entidade']; ?>">
                                                                                         <td><?php echo $res['id_negociacao']; ?></td>
                                                                                         <td><?php echo Valida::DataShow($res['cadastro'],"d/m/Y"); ?></td>
                                                                                         <td><?php echo $res['nome_razao']; ?></td>

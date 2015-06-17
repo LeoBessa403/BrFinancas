@@ -6,9 +6,9 @@ $servidor = "local";
 //$servidor = "web";
 
 if($servidor == "web"){
-    $config = array('HOME'=>'http://amigosdopet.net/','HOST'=>'cpmy0025.servidorwebfacil.com','USER'=>'amigosdo_netUser','PASS'=>'LeoBessa12345','DBSA'=>'amigosdo_net');
+    $config = array('HOME'=>'http://i9comsistemas.com.br/','HOST'=>'cpmy0025.servidorwebfacil.com','USER'=>'i9_leobessa','PASS'=>'Admin101$','DBSA'=>'i9_sistemas');
 }else{
-    $config = array('HOME'=>'http://localhost/BR_Financas/','HOST'=>'localhost','USER'=>'root','PASS'=>'','DBSA'=>'br_financas');
+    $config = array('HOME'=>'http://localhost/BrFinancas/','HOST'=>'localhost','USER'=>'root','PASS'=>'','DBSA'=>'br_financas');
 }
 
 define('HOME', $config['HOME']);

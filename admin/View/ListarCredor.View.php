@@ -64,7 +64,7 @@
                                                                                  <?php
                                                                                     foreach ($result as $res):                                                                                        
                                                                                  ?>
-                                                                                    <tr id="registro-<?php echo $res['id_entidade']; ?>" style="background-color: #cfcfcf;">
+                                                                                    <tr id="registro-<?php echo $res['id_entidade']; ?>">
                                                                                         <td><?php echo $res['nome_razao']; ?></td>                                                                                       
                                                                                         <td><?php echo $res['tel1']." / ".$res['tel2']; ?></td>                                                                                      
                                                                                         <td><?php echo $res['site']; ?></td>                                                                                      
