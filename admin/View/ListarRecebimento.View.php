@@ -53,77 +53,63 @@
                                                                             Modal::load(); 
                                                                             Modal::deletaRegistro("Recebimento");
                                                                             Modal::confirmacao("confirma_Recebimento");
-                                                                        ?>
-									<table class="table table-striped table-bordered table-hover table-full-width" id="sample_1">
-                                                                                <thead>
-                                                                                    <tr style="background-color: #006699; color: #ffffff">
-                                                                                        <th>Recebimento</th>
-                                                                                        <th>Data</th>
-                                                                                        <th>Nome / Razão Social</th>
-                                                                                        <th>Total</th>
-                                                                                        <th>Recebimento em</th>
-                                                                                        <th>Vencimento</th>
-                                                                                        <th>Parcelas</th>
-                                                                                        <th>Ações</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>           
-                                                                                 <?php
-                                                                                    foreach ($result as $res):                                                                                        
-                                                                                 ?>
-                                                                                    <tr id="registro-<?php echo $res['id_entidade']; ?>">
-                                                                                        <td><?php echo $res['id_negociacao']; ?></td>
-                                                                                        <td><?php echo Valida::DataShow($res['cadastro'],"d/m/Y"); ?></td>
-                                                                                        <td><?php echo $res['nome_razao']; ?></td>
-                                                                                        <td><?php echo Valida::formataMoeda($res['valor_total']); ?></td>
-                                                                                        <td><?php echo FuncoesSistema::tipoPagamento($res['tipo_pagamento']); ?></td>                                                                                       
-                                                                                        <td><?php echo $parcelamento[$res['id_negociacao']]; ?></td>                                                       
-                                                                                        <td>
-                                                                                            <p class="text" style="padding: 0; margin: 0;">
-                                                                                                Total de Parcelas: <b><?php  echo $res['numero_parcelas']; ?></b>
+                                                                            
+                                                                            $arrColunas = array('Recebimento','Data','Nome / Razão Social','Total','Recebimento em','Vencimento','Parcelas','Ação');
+                                                                            $grid = new Grid();
+                                                                            $grid->setColunasIndeces($arrColunas);
+                                                                            $grid->criaGrid();
+                                                                            
+                                                                            foreach ($result as $res): 
+                                                                                $pagamentos_totais = '<p class="text" style="padding: 0; margin: 0;">
+                                                                                                Total de Parcelas: <b>'.$res['numero_parcelas'].'</b>
                                                                                             </p>
                                                                                             <p class="text-danger" style="padding: 0; margin: 0;">
-                                                                                                Parcelas Vencidas: <b><?php  echo $parc[$res['id_negociacao']]['vencidas']; ?></b>
-                                                                                            </p><?php  if ($parc[$res['id_negociacao']]['vencendo'] > 0): ?>
-                                                                                            <p class="text-warning" style="padding: 0; margin: 0;">
-                                                                                                Parcelas Vencendo: <b><?php  echo $parc[$res['id_negociacao']]['vencendo']; ?></b>
-                                                                                            </p> <?php endif; ?>
-                                                                                            <p class="text-info" style="padding: 0; margin: 0;">
-                                                                                                Parcelas A vencer: <b><?php  echo $parc[$res['id_negociacao']]['avencer']; ?></b>
+                                                                                                Parcelas Vencidas: <b>'.$parc[$res['id_negociacao']]['vencidas'].'</b>
+                                                                                            </p>';
+                                                                            
+                                                                                            if ($parc[$res['id_negociacao']]['vencendo'] > 0): 
+                                                                                               $pagamentos_totais .= '<p class="text-warning" style="padding: 0; margin: 0;">
+                                                                                                    Parcelas Vencendo: <b>'.$parc[$res['id_negociacao']]['vencendo'].'</b>
+                                                                                                </p>';
+                                                                                            endif; 
+                                                                                            $pagamentos_totais .= '<p class="text-info" style="padding: 0; margin: 0;">
+                                                                                                Parcelas A vencer: <b>'.$parc[$res['id_negociacao']]['avencer'].'</b>
                                                                                             </p>                                                                                                                                                                                       
                                                                                             <p class="text-success" style="padding: 0; margin: 0;">
-                                                                                                Parcelas Pagas: <b><?php  echo $parc[$res['id_negociacao']]['pagas']; ?></b>
-                                                                                            </p>                                                                                            
-                                                                                        </td>
-                                                                                        <td>
-                                                                                            <a href="
-                                                                                               <?php 
-                                                                                               echo "admin/Recebimento/";
-                                                                                               if($res['numero_parcelas'] >= 60):
-                                                                                                   echo "CadastroContasMensais";
+                                                                                                Parcelas Pagas: <b>'.$parc[$res['id_negociacao']]['pagas'].'</b>
+                                                                                            </p>';
+                                                                                            
+                                                                                            if($res['numero_parcelas'] >= 60):
+                                                                                                   $actionF = "CadastroContasMensais";
                                                                                                else:
-                                                                                                   echo "CadastroRecebimento";
+                                                                                                   $actionF =  "CadastroRecebimento";
                                                                                                endif;
-                                                                                                 echo "/neg/";
-                                                                                                 echo $res['id_negociacao']; ?>" class="btn btn-primary tooltips" 
+                                                                                            
+                                                                                            $acao = '<a href="'.PASTAADMIN.'Recebimento/'.$actionF.'/'.Valida::GeraParametro("neg/".$res['id_negociacao']).'" class="btn btn-primary tooltips" 
                                                                                                data-original-title="Editar Registro" data-placement="top">
                                                                                                 <i class="fa fa-clipboard"></i>
                                                                                             </a>
-                                                                                            <a data-toggle="modal" role="button" class="btn btn-bricky tooltips deleta" id="<?php echo $res['id_negociacao']; ?>" 
+                                                                                            <a data-toggle="modal" role="button" class="btn btn-bricky tooltips deleta" id="'.$res['id_negociacao'].'" 
                                                                                                href="#Recebimento" data-original-title="Excluir Recebimento" data-placement="top">
                                                                                                 <i class="fa fa-trash-o"></i>
                                                                                             </a>
-                                                                                            <a href="admin/Recebimento/DetalhaRecebimento/neg/<?php echo $res['id_negociacao']; ?>" class="btn btn-dark-grey tooltips" 
+                                                                                            <a href="'.PASTAADMIN.'Recebimento/DetalhaRecebimento/'.Valida::GeraParametro("neg/".$res['id_negociacao']).'" class="btn btn-dark-grey tooltips" 
                                                                                                data-original-title="Detalhes do Recebimento" data-placement="top">
                                                                                                 <i class="fa fa-indent"></i>
-                                                                                            </a>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <?php
-                                                                                    endforeach;
-                                                                                    ?>
-                                                                                </tbody>
-                                                                            </table>
+                                                                                            </a>';
+                                                                                $grid->setColunas($res['id_negociacao']);
+                                                                                $grid->setColunas(Valida::DataShow($res['cadastro'],"d/m/Y"));
+                                                                                $grid->setColunas($res['nome_razao']);
+                                                                                $grid->setColunas(Valida::formataMoeda($res['valor_total']));
+                                                                                $grid->setColunas(FuncoesSistema::tipoPagamento($res['tipo_pagamento']));
+                                                                                $grid->setColunas($parcelamento[$res['id_negociacao']]);
+                                                                                $grid->setColunas($pagamentos_totais);
+                                                                                $grid->setColunas($acao,4);
+                                                                                $grid->criaLinha($res['id_negociacao']);
+                                                                            endforeach;
+                                                                           
+                                                                            $grid->finalizaGrid();
+                                                                        ?>
                                                                  </div>
 							</div>
 							<!-- end: DYNAMIC TABLE PANEL -->

@@ -98,59 +98,47 @@
                                                                    .h5-pagamento {padding: 2px; margin: 0;}
                                                                </style>
 								<div class="panel-body"> 
-									<table class="table table-striped table-bordered table-hover table-full-width" id="sample_1">
-                                                                                <thead>
-                                                                                    <tr style="background-color: #006699; color: #ffffff">
-                                                                                        <th>parcela</th>
-                                                                                        <th>Valor R$</th>
-                                                                                        <th>Vencimento</th>
-                                                                                        <th>Situação</th>                                                                                        
-                                                                                        <th>Observação</th>
-                                                                                        <th>Ações</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                    <?php
-                                                                                    foreach ($parcelas as $res):
-                                                                                    ?>
-                                                                                    <tr id="registro-<?php echo $res['id_entidade']; ?>" style="background-color: #cfcfcf;">
-                                                                                         <td><?php 
-                                                                                            if($res['parcela'] < 10):
-                                                                                                echo "0";
-                                                                                            endif;
-                                                                                            echo $res['parcela']; ?></td>
-                                                                                        <td><?php 
-                                                                                            if($res['valor_parcela_pago'] == ""):
-                                                                                                echo Valida::formataMoeda($res['valor_parcela']);
-                                                                                            else:
-                                                                                                echo Valida::formataMoeda($res['valor_parcela_pago']);
-                                                                                            endif;
-                                                                                         ?></td>                                                                                       
-                                                                                        <td><?php 
-                                                                                            if($res['vencimento_pago'] == ""):
-                                                                                                echo Valida::DataShow($res['vencimento'],"d/m/Y");
-                                                                                            else:
-                                                                                                echo Valida::DataShow($res['vencimento_pago'],"d/m/Y");
-                                                                                            endif;
-                                                                                         ?></td>   
-                                                                                        <td><?php echo $parcelamento[$res['id_parcelamento']]; ?></td>  
-                                                                                        <td><?php echo $res['observacao_parcela']; ?></td>                                                                                     
-                                                                                        <td>
-                                                                                            <a href="admin/Pagamento/EditaParcelamento/parc/<?php echo $res['id_parcelamento']; ?>" class="btn btn-primary tooltips" 
-                                                                                               data-original-title="Pagar Parcela" data-placement="top">
+                                                                    <?php
+                                                                            $arrColunas = array('Parcela','Valor R$','Vencimento','Situação','Observação','Ação');
+                                                                            $grid = new Grid();
+                                                                            $grid->setColunasIndeces($arrColunas);
+                                                                            $grid->criaGrid();
+                                                                            
+                                                                            foreach ($result as $res): 
+                                                                                if($res['parcela'] < 10):
+                                                                                    $parc = "0".$res['parcela'];
+                                                                                else:
+                                                                                    $parc = $res['parcela'];
+                                                                                endif;
+                                                                                if($res['valor_parcela_pago'] == ""):
+                                                                                    $valor = $res['valor_parcela'];
+                                                                                else:
+                                                                                    $valor = $res['valor_parcela_pago'];
+                                                                                endif;
+                                                                                if($res['vencimento_pago'] == ""):
+                                                                                    $venc = Valida::DataShow($res['vencimento'],"d/m/Y");
+                                                                                else:
+                                                                                    $venc = Valida::DataShow($res['vencimento_pago'],"d/m/Y");
+                                                                                endif;
+                                                                                $acao = '<a href="'.PASTAADMIN.'Pagamento/EditaParcelamento/'.Valida::GeraParametro("parc/".$res['id_parcelamento']).'" class="btn btn-primary tooltips" 
+                                                                                               data-original-title="Editar Registro" data-placement="top">
                                                                                                 <i class="fa fa-clipboard"></i>
                                                                                             </a>
-                                                                                            <a data-toggle="modal" role="button" class="btn btn-bricky tooltips deleta" id="<?php echo $res['id_parcelamento']; ?>" 
-                                                                                               href="#Pagamento" data-original-title="Excluir Pagamento" data-placement="top">
+                                                                                            <a data-toggle="modal" role="button" class="btn btn-bricky tooltips deleta" id="'.$res['id_parcelamento'].'" 
+                                                                                               href="#Pagamento" data-original-title="Excluir Registro" data-placement="top">
                                                                                                 <i class="fa fa-trash-o"></i>
-                                                                                            </a>
-                                                                                        </td>                                                                                   
-                                                                                    </tr>
-                                                                                    <?php
-                                                                                    endforeach;
-                                                                                    ?>
-                                                                                </tbody>
-                                                                            </table>
+                                                                                            </a>';
+                                                                                $grid->setColunas($parc);
+                                                                                $grid->setColunas(Valida::formataMoeda($valor));
+                                                                                $grid->setColunas($venc);
+                                                                                $grid->setColunas($parcelamento[$res['id_parcelamento']]);
+                                                                                $grid->setColunas($res['observacao_parcela']);
+                                                                                $grid->setColunas($acao,2);
+                                                                                $grid->criaLinha($res['id_entidade']);
+                                                                            endforeach;
+                                                                           
+                                                                            $grid->finalizaGrid();
+                                                                        ?>
                                                                  </div>
 							</div>
 							<!-- end: DYNAMIC TABLE PANEL -->

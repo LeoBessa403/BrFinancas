@@ -50,39 +50,30 @@
                                                                             Modal::load(); 
                                                                             Modal::deletaRegistro("Credor");
                                                                             Modal::confirmacao("confirma_Credor");
-                                                                        ?>
-									<table class="table table-striped table-bordered table-hover table-full-width" id="sample_1">
-                                                                                <thead>
-                                                                                    <tr style="background-color: #006699; color: #ffffff">
-                                                                                        <th>Nome / Razão Social</th>
-                                                                                        <th>Contatos</th>
-                                                                                        <th>Site</th>
-                                                                                        <th>Ação</th>
-                                                                                    </tr>
-                                                                                </thead>
-                                                                                <tbody>
-                                                                                 <?php
-                                                                                    foreach ($result as $res):                                                                                        
-                                                                                 ?>
-                                                                                    <tr id="registro-<?php echo $res['id_entidade']; ?>">
-                                                                                        <td><?php echo $res['nome_razao']; ?></td>                                                                                       
-                                                                                        <td><?php echo $res['tel1']." / ".$res['tel2']; ?></td>                                                                                      
-                                                                                        <td><?php echo $res['site']; ?></td>                                                                                      
-                                                                                        <td><a href="admin/Credor/CadastroCredor/ent/<?php echo $res['id_entidade']; ?>" class="btn btn-primary tooltips" 
+                                                                            
+                                                                            $arrColunas = array('Nome / Razão Social','Contatos','Site','Ação');
+                                                                            $grid = new Grid();
+                                                                            $grid->setColunasIndeces($arrColunas);
+                                                                            $grid->criaGrid();
+                                                                            
+                                                                            foreach ($result as $res): 
+                                                                                $acao = '<a href="'.PASTAADMIN.'Credor/CadastroCredor/'.Valida::GeraParametro("ent/".$res['id_entidade']).'" class="btn btn-primary tooltips" 
                                                                                                data-original-title="Editar Registro" data-placement="top">
                                                                                                 <i class="fa fa-clipboard"></i>
                                                                                             </a>
-                                                                                            <a data-toggle="modal" role="button" class="btn btn-bricky tooltips deleta" id="<?php echo $res['id_entidade']; ?>" 
+                                                                                             <a data-toggle="modal" role="button" class="btn btn-bricky tooltips deleta" id="'.$res['id_entidade'].'" 
                                                                                                href="#Credor" data-original-title="Excluir Registro" data-placement="top">
                                                                                                 <i class="fa fa-trash-o"></i>
-                                                                                            </a>
-                                                                                        </td>
-                                                                                    </tr>
-                                                                                    <?php
-                                                                                    endforeach;
-                                                                                    ?>
-                                                                                </tbody>
-                                                                            </table>
+                                                                                            </a>';
+                                                                                $grid->setColunas($res['nome_razao']);
+                                                                                $grid->setColunas($res['tel1']." / ".$res['tel2']);
+                                                                                $grid->setColunas($res['site']);
+                                                                                $grid->setColunas($acao,4);
+                                                                                $grid->criaLinha($res['id_entidade']);
+                                                                            endforeach;
+                                                                           
+                                                                            $grid->finalizaGrid();
+                                                                        ?>
                                                                  </div>
 							</div>
 							<!-- end: DYNAMIC TABLE PANEL -->
