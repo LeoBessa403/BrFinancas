@@ -48,6 +48,13 @@ class Cadastra extends Conn {
     public function getUltimoIdInserido() {
         return $this->Result;
     }
+    
+    /**
+     * <b>getSql:</b> Retorna o SQL que esta sendo Executado.  
+     */
+    public function getSql() {
+       return $this->Create;
+    }
 
     /**
      * ****************************************

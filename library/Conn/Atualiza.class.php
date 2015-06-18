@@ -73,6 +73,13 @@ class Atualiza extends Conn {
         $this->getSyntax();
         $this->Execute();
     }
+    
+    /**
+     * <b>getSql:</b> Retorna o SQL que esta sendo Executado.  
+     */
+    public function getSql() {
+       return $this->Update;
+    }
 
     /**
      * ****************************************
