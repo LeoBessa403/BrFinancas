@@ -100,20 +100,20 @@
 								<li>
 									<div class="drop-down-wrapper">
 										<ul>
-                                                                                    <?php
+                                                                                    <?php 
                                                                                         $receber = 0;
                                                                                         $pagar   = 0;
                                                                                         foreach ($pagamentos as $pag_res):
                                                                                     ?>
                                                                                         <li>
 												<a href="
-                                                                                                   <?php echo 'admin/';
+                                                                                                   <?php echo PASTAADMIN;
                                                                                                    if($pag_res['tipo_negociacao'] == "RC"):
-                                                                                                       echo "Recebimento/DetalhaRecebimento";
+                                                                                                       echo 'Recebimento/DetalhaRecebimento/';
                                                                                                    else:
-                                                                                                       echo "Pagamento/DetalhaPagamento";
+                                                                                                       echo 'Pagamento/DetalhaPagamento/';
                                                                                                    endif;                                                                                                   
-                                                                                                   echo '/neg/'.$pag_res["id_negociacao"]; ?>
+                                                                                                   echo Valida::GeraParametro('neg/'.$pag_res['id_negociacao']); ?>
                                                                                                    ">
                                                                                                     <i class="fa fa-square-o"></i> <b>                                                                                                     
                                                                                                          <?php 
@@ -147,13 +147,13 @@
                                                                                     ?>
                                                                                         <li>
 												<a href="
-                                                                                                   <?php echo 'admin/';
+                                                                                                   <?php echo PASTAADMIN;
                                                                                                    if($pag_res['tipo_negociacao'] == "RC"):
-                                                                                                       echo "Recebimento/DetalhaRecebimento";
+                                                                                                       echo "Recebimento/DetalhaRecebimento/";
                                                                                                    else:
-                                                                                                       echo "Pagamento/DetalhaPagamento";
+                                                                                                       echo "Pagamento/DetalhaPagamento/";
                                                                                                    endif;                                                                                                   
-                                                                                                   echo '/neg/'.$pag_res["id_negociacao"]; ?>
+                                                                                                   echo Valida::GeraParametro("neg/".$pag_res['id_negociacao']); ?>
                                                                                                    ">
                                                                                                     <i class="fa fa-square-o"></i> <b>                                                                                                     
                                                                                                          <?php 

@@ -72,17 +72,26 @@ function __autoload($Class) {
         elseif(!$iDir && file_exists("./".ADMIN."/{$dirName}/{$Class}.class.php") && !is_dir( "./".ADMIN."/{$dirName}/{$Class}.class.php")):
                     include_once ("./".ADMIN."/{$dirName}/{$Class}.class.php"); 
                     $iDir = true;        
+        elseif(!$iDir && file_exists("./".SITE."/{$dirName}/{$Class}.class.php") && !is_dir( "./".ADMIN."/{$dirName}/{$Class}.class.php")):
+                    include_once ("./".SITE."/{$dirName}/{$Class}.class.php"); 
+                    $iDir = true;        
         elseif(!$iDir && file_exists("../../".ADMIN."/{$dirName}/{$Class}.Controller.php") && !is_dir("../../".ADMIN."/{$dirName}/{$Class}.Controller.php")):
                     include_once ("../../".ADMIN."/{$dirName}/{$Class}.Controller.php"); 
                     $iDir = true;  
         elseif(!$iDir && file_exists("../../".ADMIN."/{$dirName}/{$Class}.class.php") && !is_dir("../../".ADMIN."/{$dirName}/{$Class}.class.php")):
                     include_once ("../../".ADMIN."/{$dirName}/{$Class}.class.php"); 
                     $iDir = true;        
+        elseif(!$iDir && file_exists("../../".SITE."/{$dirName}/{$Class}.class.php") && !is_dir("../../".ADMIN."/{$dirName}/{$Class}.class.php")):
+                    include_once ("../../".SITE."/{$dirName}/{$Class}.class.php"); 
+                    $iDir = true;        
         elseif(!$iDir && file_exists("../".ADMIN."/{$dirName}/{$Class}.Controller.php") && !is_dir("../".ADMIN."/{$dirName}/{$Class}.Controller.php")):
                     include_once ("../".ADMIN."/{$dirName}/{$Class}.Controller.php"); 
                     $iDir = true;  
         elseif(!$iDir && file_exists("../".ADMIN."/{$dirName}/{$Class}.class.php") && !is_dir("../".ADMIN."/{$dirName}/{$Class}.class.php")):
                     include_once ("../".ADMIN."/{$dirName}/{$Class}.class.php"); 
+                    $iDir = true;        
+        elseif(!$iDir && file_exists("../".SITE."/{$dirName}/{$Class}.class.php") && !is_dir("../".ADMIN."/{$dirName}/{$Class}.class.php")):
+                    include_once ("../".SITE."/{$dirName}/{$Class}.class.php"); 
                     $iDir = true;        
         elseif(!$iDir && file_exists("./".SITE."/{$dirName}/{$Class}.Controller.php") && !is_dir( "./".SITE."/{$dirName}/{$Class}.Controller.php")):
                     include_once ("./".SITE."{$dirName}/{$Class}.Controller.php"); 
