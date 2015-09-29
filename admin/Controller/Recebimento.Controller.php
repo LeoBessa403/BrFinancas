@@ -691,6 +691,6 @@ class Recebimento{
                endif;
                    
         }
-        $this->parcelamento = $parcelamento;
+        $this->parcelamento  = $parcelamento;
     }
 }

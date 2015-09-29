@@ -104,6 +104,8 @@
                                                                             $grid->setColunasIndeces($arrColunas);
                                                                             $grid->criaGrid();
                                                                             
+//                                                                            debug($result);
+                                                                            
                                                                             foreach ($result as $res): 
                                                                                 if($res['parcela'] < 10):
                                                                                     $parc = "0".$res['parcela'];
