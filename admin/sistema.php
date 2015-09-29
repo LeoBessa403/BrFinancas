@@ -190,14 +190,13 @@
 						<li class="dropdown current-user">
 							<a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" data-close-others="true" href="#">
 								<img src="<?php echo PASTAADMIN; ?>images/avatar-1-small.jpg" class="circle-img" alt="">
-                                                                <span class="username">
+                                                               <i class="fa fa-user"></i>
                                                                     <?php                                                                 
                                                                            $us = $_SESSION[SESSION_USER];                                                                    
                                                                            $user = $us->getUser();
                                                                            echo $user[md5('nome')];                                                              
 
                                                                       ?>
-                                                                </span>
 								<i class="clip-chevron-down"></i>
 							</a>
 							<ul class="dropdown-menu">

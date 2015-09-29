@@ -4,6 +4,7 @@ class Recebimento{
     
     public $form;
     public $result;
+    public $parcelamento;
     public $resultAlt;
    
     function CadastroRecebimento() {
