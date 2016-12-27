@@ -4,21 +4,20 @@ var TableData = function () {
     //which will add advanced interaction controls to any HTML table
     //For more information, please visit https://datatables.net/
     var runDataTable = function () {
-        var oTable = $('#sample_1').dataTable({
+        var oTable = $('.table').dataTable({
             "aoColumnDefs": [{
                 "aTargets": [0]
             }],
             "oLanguage": {
                 "sLengthMenu": "Registros _MENU_",
                 "sSearch": "",
+                "sInfoFiltered" :"(Filtrado(s) de _MAX_ no total)",
                 "oPaginate": {
                     "sPrevious": "",
                     "sNext": ""
                 }
             },
-            "aaSorting": [
-                [0, 'asc']
-            ],
+            "aaSorting": [],
             "aLengthMenu": [
                 [5, 10, 15, 20, -1],
                 [5, 10, 15, 20, "Todos"] // change per page values here

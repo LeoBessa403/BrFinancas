@@ -151,6 +151,8 @@ var Login = function () {
             runLoginValidator();
             runForgotValidator();
             runRegisterValidator();
+            // ABRE MODAL DE LOAD DO SISTEMA
+            setTimeout(function(){  $("#sumir").fadeOut("slow");  },  7000 ); 
         }
     };
 }();
